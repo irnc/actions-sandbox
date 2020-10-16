@@ -3,9 +3,10 @@ name: Update data by dispatch
 # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
 on:
     workflow_dispatch:
-        data:
-            description: 'Test scenario tags'
-            required: true
+        inputs:
+            data:
+                description: 'Data'
+                required: true
 
 jobs:
     update:
