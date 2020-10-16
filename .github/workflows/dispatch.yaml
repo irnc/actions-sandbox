@@ -22,7 +22,7 @@ jobs:
             - run: echo "${{ github.event.inputs.data }}" > data.txt
             - name: Push changes
               run: |
-                git config user.name ${{ GITHUB_ACTOR }}
+                git config user.name ${{ github.actor }}
                 git add data.txt
                 git commit -m "Update data.txt"
                 git push
