@@ -1,0 +1,28 @@
+name: Update data by dispatch
+
+# https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
+on:
+    workflow_dispatch:
+        data:
+            description: 'Test scenario tags'
+            required: true
+
+jobs:
+    update:
+        name: Update data
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Use Node.js 12.x
+              uses: actions/setup-node@v1
+              with:
+                node-version: 12.x
+            - run: echo "${{ github.event.inputs.data }}" > data.txt
+            - name: Push changes
+              run: |
+                git config user.name ${{ secrets.GH_USER }}
+                git config user.email "${{ secrets.GH_MAIL }}"
+                git add data.txt
+                git commit -m "Update data.txt"
+                git push
