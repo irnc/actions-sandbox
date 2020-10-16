@@ -19,10 +19,9 @@ jobs:
               uses: actions/setup-node@v1
               with:
                 node-version: 12.x
-            - run: echo "${{ github.event.inputs.data }}" > data.txt
+            - run: echo "\"${{ github.event.inputs.data }}\"" > src/data.json
             - name: Push changes
               run: |
                 git config user.name ${{ github.actor }}
-                git add data.txt
-                git commit -m "Update data.txt"
+                git commit -a -m "Update data.json"
                 git push
